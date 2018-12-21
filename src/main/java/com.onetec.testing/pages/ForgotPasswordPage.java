@@ -11,7 +11,7 @@ public class ForgotPasswordPage {
 
     private WebDriver driver;
 
-    public static String url = "https://the-internet.herokuapp.com/forgot_password";
+    private String url = "https://the-internet.herokuapp.com/forgot_password";
 
     @FindBy(how = How.ID, using="email")
     private static WebElement mailForm;

@@ -11,13 +11,25 @@ public class VerifyValidEmail {
     private static HomePage homePage;
     private static ForgotPasswordPage forgotPasswordPage;
     private static WebDriver driver;
+    private static int testNumber;
 
     @BeforeClass
-    public static void startBrowser() {
+    public static void initBrowser() {
         browser = new Browser();
+        testNumber = 0;
+    }
+
+    @Before
+    public void startBrowser() {
+
+        testNumber++;
+
         browser.startBrowser(HomePage.url);
+
         driver = browser.getDriver();
+
         homePage = PageFactory.initElements(driver, HomePage.class);
+
     }
 
 
@@ -34,10 +46,21 @@ public class VerifyValidEmail {
 
     }
 
+    @Test
+    public void test() {
+        browser.goTo(HomePage.url);
+
+        Assert.assertTrue(homePage.isAt());
+    }
+
+    @After
+    public void closeBrowser() {
+        browser.takeScreenshot("resultadoTest"+testNumber+".png");
+        browser.close();
+    }
+
     @AfterClass
     public static void cleanUp() {
-        browser.takeScreenshot("resultado.png");
-        browser.close();
         browser.quit();
     }
 

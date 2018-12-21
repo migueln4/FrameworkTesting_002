@@ -5,9 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
-public class HomePage {
-
-    private WebDriver driver;
+public class HomePage extends WebPage {
 
     public static String url = "https://the-internet.herokuapp.com/";
 
@@ -15,7 +13,7 @@ public class HomePage {
     private static WebElement linkForgotPassword;
 
     public HomePage(WebDriver driver) {
-        this.driver = driver;
+        super.driver = driver;
     }
 
     public void clickLinkForgotPassword() {
@@ -26,4 +24,13 @@ public class HomePage {
         return url;
     }
 
+    @Override
+    public boolean isAt() {
+        String currentUrl = driver.getCurrentUrl();
+        if(currentUrl.indexOf('?') > 0) {
+            currentUrl = driver.getCurrentUrl().substring(0, currentUrl.indexOf('?'));
+        }
+        //System.out.println(currentUrl);
+        return currentUrl.equals(this.url);
+    }
 }
