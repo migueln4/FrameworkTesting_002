@@ -8,8 +8,4 @@ public abstract class WebPage {
 
     public abstract boolean isAt();
 
-
-
-
-
 }

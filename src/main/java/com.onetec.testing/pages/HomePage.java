@@ -7,10 +7,16 @@ import org.openqa.selenium.support.How;
 
 public class HomePage extends WebPage {
 
-    public static String url = "https://the-internet.herokuapp.com/";
+    public static String url="https://the-internet.herokuapp.com/";
 
     @FindBy(how = How.CSS, using="#content > ul > li:nth-child(17) > a")
-    private static WebElement linkForgotPassword;
+    private WebElement linkForgotPassword;
+
+    @FindBy(how = How.CSS, using="#content > ul > li:nth-child(5) > a")
+    private WebElement linkCheckboxes;
+
+    @FindBy(how = How.CSS, using="#content > ul > li:nth-child(9) > a")
+    private WebElement linkDropdownList;
 
     public HomePage(WebDriver driver) {
         super.driver = driver;
@@ -19,6 +25,10 @@ public class HomePage extends WebPage {
     public void clickLinkForgotPassword() {
         linkForgotPassword.click();
     }
+
+    public void clickLinkCheckboxes() { linkCheckboxes.click();}
+
+    public void clickDropdownList() { linkDropdownList.click();}
 
     public String getUrl() {
         return url;
@@ -30,7 +40,7 @@ public class HomePage extends WebPage {
         if(currentUrl.indexOf('?') > 0) {
             currentUrl = driver.getCurrentUrl().substring(0, currentUrl.indexOf('?'));
         }
-        //System.out.println(currentUrl);
-        return currentUrl.equals(this.url);
+        return currentUrl.equals(url);
     }
+
 }

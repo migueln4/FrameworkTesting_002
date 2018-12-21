@@ -7,20 +7,18 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
-public class ForgotPasswordPage {
+public class ForgotPasswordPage extends WebPage {
 
-    private WebDriver driver;
-
-    private String url = "https://the-internet.herokuapp.com/forgot_password";
+    public static String url="https://the-internet.herokuapp.com/forgot_password";
 
     @FindBy(how = How.ID, using="email")
-    private static WebElement mailForm;
+    private WebElement mailForm;
 
     @FindBy(how = How.XPATH, using="//*[@id=\"form_submit\"]/i")
-    private static WebElement submitButton;
+    private WebElement submitButton;
 
     public ForgotPasswordPage(WebDriver driver) {
-        this.driver = driver;
+        super.driver = driver;
     }
 
     public void enterMail(String email) {
@@ -34,10 +32,13 @@ public class ForgotPasswordPage {
         return element.getText().equals("Your e-mail's been sent!");
     }
 
-    public String getUrl() {
-        return url;
+    @Override
+    public boolean isAt() {
+        String currentUrl = driver.getCurrentUrl();
+        if(currentUrl.indexOf('?') > 0) {
+            currentUrl = driver.getCurrentUrl().substring(0, currentUrl.indexOf('?'));
+        }
+        return currentUrl.equals(url);
     }
-
-
 
 }
