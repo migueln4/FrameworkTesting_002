@@ -66,5 +66,9 @@ public class Browser {
         }
     }
 
+    public static void refreshBrowser() {
+        driver.navigate().refresh();
+    }
+
 
 }
