@@ -48,13 +48,11 @@ public class VerifyValidEmail {
 
     @Test
     public void test() {
-        //browser.goTo(HomePage.url);
         Assert.assertTrue(homePage.isAt());
     }
 
     @Test
     public void checkboxTest() {
-        //browser.goTo(HomePage.url);
         homePage.clickLinkCheckboxes();
         checkboxPage = PageFactory.initElements(driver,CheckboxPage.class);
         checkboxPage.clickCheckbox(1);
@@ -66,7 +64,6 @@ public class VerifyValidEmail {
     @Test
     public void selectDropdownList() {
         String option = "1";
-        //browser.goTo(HomePage.url);
         homePage.clickDropdownList();
         dropdownListPage = PageFactory.initElements(driver,DropdownListPage.class);
         dropdownListPage.clickDropdownList(option);
@@ -78,7 +75,6 @@ public class VerifyValidEmail {
         String searchUrl = HomePage.url+"img/avatars/Original-Facebook-Geek-Profile-Avatar-1.jpg";
         int attempts = 0;
         boolean flag = false;
-        //browser.goTo(HomePage.url);
         homePage.clickDynamicContent();
         dynamicContentPage = PageFactory.initElements(driver,DynamicContentPage.class);
         do {
@@ -94,7 +90,6 @@ public class VerifyValidEmail {
     public void loginAttemptFailed() {
         String user = "user";
         String pass = "pass";
-        //browser.goTo(HomePage.url);
         homePage.clickFormAuthentication();
         loginPage = PageFactory.initElements(driver,LoginPage.class);
         Assert.assertTrue(loginPage.clickSubmit(user,pass));
@@ -105,7 +100,6 @@ public class VerifyValidEmail {
     public void loginAttemptSuccess() {
         String user = "tomsmith";
         String pass = "SuperSecretPassword!";
-        //browser.goTo(HomePage.url);
         homePage.clickFormAuthentication();
         loginPage = PageFactory.initElements(driver,LoginPage.class);
         Assert.assertFalse(loginPage.clickSubmit(user,pass));
@@ -113,7 +107,6 @@ public class VerifyValidEmail {
 
     @Test
     public void hoverMenu() {
-        //browser.goTo(HomePage.url);
         homePage.clickJQuerymenu();
         jQueryMenuPage = PageFactory.initElements(driver,JQueryMenuPage.class);
         Assert.assertTrue(jQueryMenuPage.hoverMenu());
