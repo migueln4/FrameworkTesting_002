@@ -22,6 +22,16 @@ public class DynamicContentPage extends WebPage {
         super.driver = driver;
     }
 
+    public boolean itsImg(String url) {
+        if(url.equals(image1.getAttribute("src"))
+            || url.equals(image2.getAttribute("src"))
+            || url.equals(image3.getAttribute("src"))) {
+            return true;
+        }
+        else
+            return false;
+    }
+
     @Override
     public boolean isAt() {
         String currentUrl = driver.getCurrentUrl();

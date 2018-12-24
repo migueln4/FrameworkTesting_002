@@ -21,6 +21,9 @@ public class HomePage extends WebPage {
     @FindBy(how = How.CSS, using="#content > ul > li:nth-child(10) > a")
     private WebElement linkDynamicContent;
 
+    @FindBy(how = How.CSS, using="#content > ul > li:nth-child(18) > a")
+    private WebElement linkFormAuthentication;
+
     public HomePage(WebDriver driver) {
         super.driver = driver;
     }
@@ -37,8 +40,8 @@ public class HomePage extends WebPage {
         linkDynamicContent.click();
     }
 
-    public String getUrl() {
-        return url;
+    public void clickFormAuthentication() {
+        linkFormAuthentication.click();
     }
 
     @Override

@@ -1,8 +1,10 @@
 import com.onetec.testing.browsers.Browser;
 import com.onetec.testing.pages.CheckboxPage;
 import com.onetec.testing.pages.DropdownListPage;
+import com.onetec.testing.pages.DynamicContentPage;
 import com.onetec.testing.pages.ForgotPasswordPage;
 import com.onetec.testing.pages.HomePage;
+import com.onetec.testing.pages.LoginPage;
 import org.junit.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
@@ -15,6 +17,8 @@ public class VerifyValidEmail {
     private CheckboxPage checkboxPage;
     private DropdownListPage dropdownListPage;
     private WebDriver driver;
+    private DynamicContentPage dynamicContentPage;
+    private LoginPage loginPage;
     private static int testNumber;
 
     @BeforeClass
@@ -60,17 +64,51 @@ public class VerifyValidEmail {
     @Test
     public void selectDropdownList() {
         String option = "1";
-
         browser.goTo(HomePage.url);
-
         homePage.clickDropdownList();
-
         dropdownListPage = PageFactory.initElements(driver,DropdownListPage.class);
-
         dropdownListPage.clickDropdownList(option);
-
         Assert.assertTrue(dropdownListPage.optionSelected(option));
     }
+
+    @Test
+    public void dynamicContentSearch() {
+        String searchUrl = HomePage.url+"img/avatars/Original-Facebook-Geek-Profile-Avatar-1.jpg";
+        int attempts = 0;
+        boolean flag = false;
+        browser.goTo(HomePage.url);
+        homePage.clickDynamicContent();
+        dynamicContentPage = PageFactory.initElements(driver,DynamicContentPage.class);
+        do {
+            flag = dynamicContentPage.itsImg(searchUrl);
+            browser.refreshBrowser();
+            attempts++;
+        }while (!flag);
+        System.out.println("Intentos realizados: "+attempts);
+        Assert.assertTrue(flag);
+    }
+
+    @Test
+    public void loginAttemptFailed() {
+        String user = "user";
+        String pass = "pass";
+        browser.goTo(HomePage.url);
+        homePage.clickFormAuthentication();
+        loginPage = PageFactory.initElements(driver,LoginPage.class);
+        Assert.assertTrue(loginPage.clickSubmit(user,pass));
+
+    }
+
+    @Test
+    public void loginAttemptSuccess() {
+        String user = "tomsmith";
+        String pass = "SuperSecretPassword!";
+        browser.goTo(HomePage.url);
+        homePage.clickFormAuthentication();
+        loginPage = PageFactory.initElements(driver,LoginPage.class);
+        Assert.assertFalse(loginPage.clickSubmit(user,pass));
+    }
+
 
     @After
     public void closeBrowser() {
