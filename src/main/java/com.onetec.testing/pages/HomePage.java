@@ -24,6 +24,10 @@ public class HomePage extends WebPage {
     @FindBy(how = How.CSS, using="#content > ul > li:nth-child(18) > a")
     private WebElement linkFormAuthentication;
 
+    @FindBy(how = How.CSS, using="#content > ul > li:nth-child(24) > a")
+    private WebElement linkJQueryMenu;
+
+
     public HomePage(WebDriver driver) {
         super.driver = driver;
     }
@@ -43,6 +47,11 @@ public class HomePage extends WebPage {
     public void clickFormAuthentication() {
         linkFormAuthentication.click();
     }
+
+    public void clickJQuerymenu() {
+        linkJQueryMenu.click();
+    }
+
 
     @Override
     public boolean isAt() {

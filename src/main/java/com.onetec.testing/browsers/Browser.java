@@ -57,6 +57,18 @@ public class Browser {
         return element;
     }
 
+    public static WebElement waitToBeVisible(By by) {
+        WebElement element = driver.findElement(by);
+        wait.until(ExpectedConditions.visibilityOf(element));
+        return element;
+    }
+
+    public static WebElement waitToBeClickable(By by) {
+        WebElement element = driver.findElement(by);
+        wait.until(ExpectedConditions.elementToBeClickable(element));
+        return element;
+    }
+
     public static void takeScreenshot(String path) {
         File captura = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
         try {
