@@ -27,6 +27,9 @@ public class HomePage extends WebPage {
     @FindBy(how = How.CSS, using="#content > ul > li:nth-child(24) > a")
     private WebElement linkJQueryMenu;
 
+    @FindBy(how = How.CSS, using="#content > ul > li:nth-child(13) > a")
+    private WebElement linkExitIntent;
+
 
     public HomePage(WebDriver driver) {
         super.driver = driver;
@@ -52,6 +55,9 @@ public class HomePage extends WebPage {
         linkJQueryMenu.click();
     }
 
+    public void clickExitIntent() {
+        linkExitIntent.click();
+    }
 
     @Override
     public boolean isAt() {

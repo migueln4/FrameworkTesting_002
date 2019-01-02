@@ -8,25 +8,23 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
-public class JQueryMenuPage extends WebPage {
+public class ExitIntent extends WebPage {
 
-    public static String url = "https://the-internet.herokuapp.com/jqueryui/menu";
+    public static String url = "https://the-internet.herokuapp.com/exit_intent";
 
-    @FindBy(how = How.XPATH, using="//*[@id=\"ui-id-3\"]/a")
-    private WebElement itemMenuEnabled;
+    @FindBy(how = How.CSS, using="#content > div.example > h3")
+    private WebElement titleH3;
 
-    public JQueryMenuPage(WebDriver driver) {
+    public ExitIntent(WebDriver driver) {
         super.driver = driver;
     }
 
-    public boolean hoverMenu() {
-        JQueryUIPage jQueryUIPage = new JQueryUIPage(driver);
+    public boolean moveMouse() {
+        boolean response = false;
         Actions action = new Actions(driver);
-        action.moveToElement(itemMenuEnabled).build().perform();
-        //WebElement link = Browser.waitToBeClickable(By.cssSelector("#ui-id-8 > a"));
-        //link.click();
-        Browser.waitToBeClickable(By.cssSelector("#ui-id-8 > a")).click();
-        return jQueryUIPage.isAt();
+        action.moveToElement(titleH3).moveByOffset(0,-10000).build().perform();
+        response = Browser.waitToBeClickable(By.cssSelector("#ouibounce-modal > div.modal > div.modal-footer > p")).isDisplayed();
+        return response;
     }
 
     @Override
@@ -37,5 +35,4 @@ public class JQueryMenuPage extends WebPage {
         }
         return currentUrl.equals(url);
     }
-
 }

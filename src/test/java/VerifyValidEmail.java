@@ -1,11 +1,5 @@
 import com.onetec.testing.browsers.Browser;
-import com.onetec.testing.pages.CheckboxPage;
-import com.onetec.testing.pages.DropdownListPage;
-import com.onetec.testing.pages.DynamicContentPage;
-import com.onetec.testing.pages.ForgotPasswordPage;
-import com.onetec.testing.pages.HomePage;
-import com.onetec.testing.pages.JQueryMenuPage;
-import com.onetec.testing.pages.LoginPage;
+import com.onetec.testing.pages.*;
 import org.junit.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
@@ -13,14 +7,15 @@ import org.openqa.selenium.support.PageFactory;
 public class VerifyValidEmail {
 
     private static Browser browser;
+    private WebDriver driver;
     private HomePage homePage;
     private ForgotPasswordPage forgotPasswordPage;
     private CheckboxPage checkboxPage;
     private DropdownListPage dropdownListPage;
-    private WebDriver driver;
     private DynamicContentPage dynamicContentPage;
     private JQueryMenuPage jQueryMenuPage;
     private LoginPage loginPage;
+    private ExitIntent exitIntent;
     private static int testNumber;
 
     @BeforeClass
@@ -72,7 +67,7 @@ public class VerifyValidEmail {
 
     @Test
     public void dynamicContentSearch() {
-        String searchUrl = HomePage.url+"img/avatars/Original-Facebook-Geek-Profile-Avatar-1.jpg";
+        String searchUrl = HomePage.url+"img/avatars/Original-Facebook-Geek-Profile-Avatar-7" +".jpg";
         int attempts = 0;
         boolean flag = false;
         homePage.clickDynamicContent();
@@ -110,6 +105,14 @@ public class VerifyValidEmail {
         homePage.clickJQuerymenu();
         jQueryMenuPage = PageFactory.initElements(driver,JQueryMenuPage.class);
         Assert.assertTrue(jQueryMenuPage.hoverMenu());
+    }
+
+    @Test
+    public void moveMouse() {
+        homePage.clickExitIntent();
+        exitIntent = PageFactory.initElements(driver,ExitIntent.class);
+        Assert.assertTrue(exitIntent.moveMouse());
+
     }
 
     @After
